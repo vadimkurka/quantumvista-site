@@ -815,7 +815,8 @@ section { padding: 120px 0; }
         </div>
       </div>
       <div class="contact-form reveal" style="transition-delay: 0.1s;">
-        <form id="contactForm" onsubmit="return handleSubmit(event)">
+        <form id="contactForm" action="https://formspree.io/f/meerrwok" method="POST">
+  <form id="contactForm" action="https://formspree.io/f/meerrwok" method="POST">
           <div class="form-row">
             <div class="form-group">
               <label>Name</label>
@@ -887,19 +888,6 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ─── Form handler ───
-function handleSubmit(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('.form-submit');
-  const original = btn.textContent;
-  btn.textContent = 'Sent ✓';
-  btn.style.background = '#10B981';
-  setTimeout(() => {
-    btn.textContent = original;
-    btn.style.background = '';
-    e.target.reset();
-  }, 2500);
-  return false;
-}
 </script>
 </body>
 </html>
