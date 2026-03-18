@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumVista LLC | AI-Powered Intelligence Systems</title>
+    
+    <!-- Стек технологий: Tailwind для верстки, GSAP для премиальной анимации -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent: #3b82f6;
+            --bg: #030303;
+        }
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            cursor: none; /* Кастомный курсор для премиального ощущения */
+        }
+        
+        .cursor-dot {
+            width: 8px; height: 8px; background: var(--accent);
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999;
+        }
+        .cursor-outline {
+            width: 40px; height: 40px; border: 1px solid rgba(59, 130, 246, 0.5);
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998;
+            transition: transform 0.15s ease-out;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 30%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Анимация сканирующей линии для тех-эффекта */
+        .scanline {
+            width: 100%; height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.05), transparent);
+            position: fixed; top: -100px; left: 0; z-index: 10;
+            pointer-events: none; animation: scan 8s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: -100px; }
+            100% { top: 100%; }
+        }
+
+        input, textarea, select {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            transition: all 0.3s ease;
+        }
+        input:focus, textarea:focus {
+            border-color: var(--accent) !important;
+            outline: none;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+    <div class="scanline"></div>
+    
+    <!-- Интерактивный фон -->
+    <canvas id="bg-canvas" class="fixed top-0 left-0 -z-10 opacity-50"></canvas>
+
+    <!-- Header -->
+    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center backdrop-blur-md border-b border-white/5">
+        <div class="text-xl font-extrabold tracking-tighter uppercase">
+            Quantum<span class="text-blue-500 italic">Vista</span>
+        </div>
+        <div class="hidden md:flex gap-12 text-[10px] font-bold tracking-[0.3em] text-gray-400">
+            <a href="#services" class="hover:text-white transition-colors">SERVICES</a>
+            <a href="#process" class="hover:text-white transition-colors">PROCESS</a>
+            <a href="#contact" class="hover:text-white transition-colors">CONTACT</a>
+        </div>
+        <a href="#contact" class="glass px-6 py-2 text-[10px] font-bold tracking-widest hover:bg-blue-600 transition-all">START PROJECT</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-20">
+        <div class="inline-block glass px-4 py-1 rounded-full text-[10px] tracking-[0.4em] text-blue-400 mb-8 reveal">
+            LOS ANGELES • TECHNOLOGY ADVANTAGE
+        </div>
+        <h1 class="text-6xl md:text-[120px] font-extrabold leading-[0.9] text-center tracking-tighter mb-10 reveal">
+            <span class="gradient-text">QUANTUM</span><br>INTELLIGENCE
+        </h1>
+        <p class="max-w-xl text-center text-gray-400 text-lg leading-relaxed reveal">
+            QuantumVista LLC designs and deploys solutions that transform operational complexity into measurable advantage.
+        </p>
+        
+        <div class="mt-20 animate-bounce opacity-20">
+            <div class="w-[1px] h-20 bg-gradient-to-b from-blue-500 to-transparent mx-auto"></div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
+            <h2 class="text-5xl font-bold tracking-tighter">CORE<br><span class="text-blue-500">SERVICES</span></h2>
+            <p class="text-gray-500 max-w-xs text-sm uppercase tracking-widest leading-loose">Engineered for performance and maintainability.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Card 1 -->
+            <div class="service-card glass p-12 rounded-3xl relative overflow-hidden group hover:bg-white/[0.05] transition-all">
+                <div class="service-icon text-4xl mb-8 transition-transform duration-500">🤖</div>
+                <h3 class="text-2xl font-bold mb-4">AI Automation</h3>
+                <p class="text-gray-400 leading-relaxed">Intelligent systems that automate workflows, process data at scale, and accelerate decision-making beyond manual capabilities.</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="service-card glass p-12 rounded-3xl relative overflow-hidden group hover:bg-white/[0.05] transition-all">
+                <div class="service-icon text-4xl mb-8 transition-transform duration-500">💻</div>
+                <h3 class="text-2xl font-bold mb-4">Custom Software</h3>
+                <p class="text-gray-400 leading-relaxed">Production-grade web applications, APIs, and platforms built with modern technology stacks, optimized for performance.</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="service-card glass p-12 rounded-3xl relative overflow-hidden group hover:bg-white/[0.05] transition-all">
+                <div class="service-icon text-4xl mb-8 transition-transform duration-500">📊</div>
+                <h3 class="text-2xl font-bold mb-4">Data Intelligence</h3>
+                <p class="text-gray-400 leading-relaxed">Analytics pipelines, OSINT systems, and monitoring infrastructure that convert raw data into actionable business intelligence.</p>
+            </div>
+            <!-- Card 4 -->
+            <div class="service-card glass p-12 rounded-3xl relative overflow-hidden group hover:bg-white/[0.05] transition-all">
+                <div class="service-icon text-4xl mb-8 transition-transform duration-500">📈</div>
+                <h3 class="text-2xl font-bold mb-4">Growth Systems</h3>
+                <p class="text-gray-400 leading-relaxed">Traffic acquisition, conversion optimization, and marketing automation engineered for measurable, compounding results.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="py-32 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-center text-4xl font-bold mb-24 tracking-tighter underline decoration-blue-500 underline-offset-8">THE THREE-PHASE PROCESS</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                <div class="process-item text-center">
+                    <div class="text-[60px] font-black text-white/5 mb-4">01</div>
+                    <h4 class="text-xl font-bold mb-4">Focused Discovery</h4>
+                    <p class="text-gray-500 text-sm italic">Define scope and success criteria.</p>
+                </div>
+                <div class="process-item text-center border-x border-white/5">
+                    <div class="text-[60px] font-black text-white/5 mb-4">02</div>
+                    <h4 class="text-xl font-bold mb-4">Iterative Development</h4>
+                    <p class="text-gray-500 text-sm italic">Rapid prototyping & early feedback.</p>
+                </div>
+                <div class="process-item text-center">
+                    <div class="text-[60px] font-black text-white/5 mb-4">03</div>
+                    <h4 class="text-xl font-bold mb-4">Production Deployment</h4>
+                    <p class="text-gray-500 text-sm italic">Monitoring and scaling support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-5xl mx-auto glass rounded-[40px] p-8 md:p-16 relative overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="text-5xl font-bold mb-8 tracking-tighter italic">Scale<br>Now.</h2>
+                    <p class="text-gray-400 mb-8">Open for new projects. Our intelligence systems are ready to deploy.</p>
+                    <div class="space-y-4 text-sm font-bold tracking-widest text-blue-500">
+                        <p>INFO@QUANTUMVISTA.TECH</p>
+                        <p>LOS ANGELES, CALIFORNIA</p>
+                    </div>
+                </div>
+                
+                <form id="contact-form" action="https://formspree.io/f/meerrwok" method="POST" class="flex flex-col gap-4">
+                    <input type="text" name="name" placeholder="FULL NAME" required class="p-4 rounded-xl text-xs font-bold tracking-widest">
+                    <input type="email" name="email" placeholder="EMAIL ADDRESS" required class="p-4 rounded-xl text-xs font-bold tracking-widest">
+                    <select name="service" class="p-4 rounded-xl text-xs font-bold tracking-widest text-gray-400">
+                        <option value="Automation">AI AUTOMATION</option>
+                        <option value="Software">CUSTOM SOFTWARE</option>
+                        <option value="Intelligence">DATA INTELLIGENCE</option>
+                    </select>
+                    <textarea name="message" placeholder="PROJECT BRIEF" rows="4" required class="p-4 rounded-xl text-xs font-bold tracking-widest"></textarea>
+                    
+                    <button type="submit" id="submit-btn" class="bg-blue-600 hover:bg-blue-500 py-5 rounded-xl text-[10px] font-black tracking-[0.5em] transition-all">
+                        DEPLOY INQUIRY
+                    </button>
+                    <p id="form-status" class="hidden text-center text-[10px] font-bold tracking-widest mt-2"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-white/5 text-center text-[8px] tracking-[0.5em] text-gray-600 uppercase">
+        © 2024 QuantumVista LLC • Strategic Intelligence • Made for Excellence
+    </footer>
+
+    <script>
+        // --- CURSOR LOGIC ---
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(dot, {x: e.clientX, y: e.clientY, duration: 0.1});
+            gsap.to(outline, {x: e.clientX - 16, y: e.clientY - 16, duration: 0.3});
+        });
+
+        // --- CANVAS BACKGROUND ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.3)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // --- GSAP ANIMATIONS ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Reveal
+        gsap.from(".reveal", {
+            y: 100, opacity: 0, duration: 1.2, stagger: 0.2, ease: "expo.out"
+        });
+
+        // Cards Scroll
+        gsap.utils.toArray(".service-card").forEach(card => {
+            gsap.from(card, {
+                scrollTrigger: { trigger: card, start: "top 90%" },
+                y: 50, opacity: 0, duration: 1, ease: "power3.out"
+            });
+        });
+
+        // Process Stagger
+        gsap.from(".process-item", {
+            scrollTrigger: { trigger: "#process", start: "top 70%" },
+            y: 30, opacity: 0, duration: 1, stagger: 0.3, ease: "power2.out"
+        });
+
+        // --- FORM HANDLING (AJAX) ---
+        const form = document.getElementById('contact-form');
+        const status = document.getElementById('form-status');
+        const btn = document.getElementById('submit-btn');
+
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            btn.innerText = "TRANSMITTING...";
+            btn.disabled = true;
+            
+            const data = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+            
+            if (response.ok) {
+                status.innerText = "INQUIRY RECEIVED. RESPONSE WITHIN 24H.";
+                status.classList.remove('hidden');
+                status.style.color = "#3b82f6";
+                form.reset();
+                btn.innerText = "SUCCESS";
+            } else {
+                status.innerText = "TRANSMISSION ERROR. TRY AGAIN.";
+                status.classList.remove('hidden');
+                status.style.color = "#ef4444";
+                btn.disabled = false;
+                btn.innerText = "RETRY DEPLOY";
+            }
+        };
+    </script>
+</body>
+</html>
