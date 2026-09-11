@@ -10,12 +10,12 @@
     "keywords": {"title":"Keywords","type":"array","description":"Optional text match against business name, industry, permit type and work description.","editor":"stringList","default":[]},
     "minScore": {"title":"Minimum opportunity score","type":"integer","description":"0-100. Higher values return fewer but stronger signals.","default":35,"minimum":0,"maximum":100,"editor":"number"},
     "onlyMultiSignal": {"title":"Only independently confirmed opportunities","type":"boolean","description":"Require both a City business-registry signal and a building-permit signal at the same normalized address.","default":false,"editor":"checkbox"},
-    "includeBusinessRegistrations": {"title":"Use business registry/start dates","type":"boolean","default":true,"editor":"checkbox"},
-    "includeSubmittedPermits": {"title":"Use submitted permits","type":"boolean","default":true,"editor":"checkbox"},
-    "includeIssuedPermits": {"title":"Use issued permits","type":"boolean","default":true,"editor":"checkbox"},
-    "includeResidential": {"title":"Include residential permit signals","type":"boolean","description":"Off by default because this Actor is designed for B2B prospecting, not homeowners.","default":false,"editor":"checkbox"},
-    "maxResults": {"title":"Maximum opportunities","type":"integer","default":250,"minimum":1,"maximum":5000,"editor":"number"},
+    "includeBusinessRegistrations": {"title":"Use business registry/start dates","type":"boolean","description":"Include active City business-registry records and their registered location start dates.","default":true,"editor":"checkbox"},
+    "includeSubmittedPermits": {"title":"Use submitted permits","type":"boolean","description":"Include recently submitted City building-permit applications as early project signals.","default":true,"editor":"checkbox"},
+    "includeIssuedPermits": {"title":"Use issued permits","type":"boolean","description":"Include recently issued City building permits as project-progress signals.","default":true,"editor":"checkbox"},
+    "includeResidential": {"title":"Include residential permit signals","type":"boolean","description":"Include permits classified as residential. Off by default because this Actor is designed for B2B prospecting.","default":false,"editor":"checkbox"},
+    "maxResults": {"title":"Maximum opportunities","type":"integer","description":"Maximum number of ranked opportunities to write to the default dataset.","default":250,"minimum":1,"maximum":5000,"editor":"number"},
     "maxRecordsPerSource": {"title":"Maximum source records","type":"integer","description":"Safety cap per City dataset before scoring and merging.","default":3000,"minimum":1,"maximum":10000,"editor":"number"},
-    "includeRaw": {"title":"Include raw source rows","type":"boolean","description":"Adds the original public-data row under each evidence item. Usually not needed.","default":false,"editor":"checkbox"}
+    "includeRaw": {"title":"Include raw source rows","type":"boolean","description":"Add the original public-data row under each evidence item. Usually not needed and increases output size.","default":false,"editor":"checkbox"}
   }
 }
