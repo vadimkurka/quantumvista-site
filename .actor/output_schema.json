@@ -1,0 +1,17 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "OpenSoon LA output",
+  "description": "Links to the ranked opportunity dataset and run summary.",
+  "properties": {
+    "results": {
+      "type": "string",
+      "title": "Ranked opportunities",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/OUTPUT"
+    }
+  }
+}
