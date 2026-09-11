@@ -1,0 +1,10 @@
+.git
+.github
+node_modules
+storage
+apify_storage
+*.log
+CNAME
+index.html
+opensoon-la.html
+README-OPENSOON.md
