@@ -1,0 +1,28 @@
+{
+  "actorSpecification": 1,
+  "fields": {},
+  "views": {
+    "overview": {
+      "title": "Ranked opportunities",
+      "transformation": {
+        "fields": ["opportunityScore","confidence","latestSignalDate","businessName","dbaName","vertical","address","zipCode","maxPermitValuation","signalTypes","vendorNeeds"]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "opportunityScore": {"label":"Score","format":"number"},
+          "confidence": {"label":"Confidence","format":"text"},
+          "latestSignalDate": {"label":"Latest signal","format":"date"},
+          "businessName": {"label":"Business","format":"text"},
+          "dbaName": {"label":"DBA","format":"text"},
+          "vertical": {"label":"Vertical","format":"text"},
+          "address": {"label":"Address","format":"text"},
+          "zipCode": {"label":"ZIP","format":"text"},
+          "maxPermitValuation": {"label":"Permit value","format":"number"},
+          "signalTypes": {"label":"Signals","format":"array"},
+          "vendorNeeds": {"label":"Likely vendor needs","format":"array"}
+        }
+      }
+    }
+  }
+}
