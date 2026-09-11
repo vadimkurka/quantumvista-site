@@ -1,0 +1,32 @@
+name: OpenSoon LA live smoke
+
+on:
+  push:
+    branches:
+      - feature/opensoon-la
+  workflow_dispatch:
+
+jobs:
+  test-live-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Syntax checks
+        run: npm run check
+
+      - name: Live LA Open Data smoke test
+        run: npm run live-smoke
