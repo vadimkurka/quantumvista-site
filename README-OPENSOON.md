@@ -43,6 +43,6 @@ The repository is ready to import/build as an Apify Actor from its root. Publish
 
 Landing page: `opensoon-la.html`
 
-Stripe early-access offer: $9 one-time.
+Stripe early-access offer: $9 one-time. The landing page remains on the feature branch until the Actor has an authenticated Apify deployment path, so the paid offer is not intentionally exposed on the production site before delivery is ready.
 
 Do not treat public-record signals as proof of opening dates, purchase intent, or sales outcomes.
