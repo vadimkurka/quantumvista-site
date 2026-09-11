@@ -1,6 +1,8 @@
 # OpenSoon LA
 
-OpenSoon LA is an Apify Actor release candidate for early Los Angeles B2B opportunity discovery.
+Status: release candidate; live-data validated; awaiting authenticated Apify deployment.
+
+OpenSoon LA is an Apify Actor for early Los Angeles B2B opportunity discovery.
 
 ## What it does
 
