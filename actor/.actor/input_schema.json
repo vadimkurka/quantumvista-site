@@ -1,0 +1,107 @@
+{
+  "title": "OpenSoon LA input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "daysBack": {
+      "title": "Lookback days",
+      "type": "integer",
+      "description": "How far back to look for new business and permit signals.",
+      "default": 30,
+      "minimum": 1,
+      "maximum": 180,
+      "editor": "number"
+    },
+    "verticals": {
+      "title": "Business verticals",
+      "type": "array",
+      "description": "Optional vertical filter. Leave empty for all commercial opportunities.",
+      "editor": "select",
+      "default": [],
+      "items": {
+        "type": "string",
+        "enum": ["restaurant_food", "beauty_wellness", "fitness", "medical_dental", "retail", "hospitality", "office_professional", "general_commercial"],
+        "enumTitles": ["Restaurants / food", "Beauty / wellness", "Fitness", "Medical / dental", "Retail", "Hospitality", "Professional offices", "General commercial"]
+      }
+    },
+    "zipCodes": {
+      "title": "ZIP codes",
+      "type": "array",
+      "description": "Optional 5-digit LA ZIP filters, e.g. 90012.",
+      "editor": "stringList",
+      "default": []
+    },
+    "keywords": {
+      "title": "Keywords",
+      "type": "array",
+      "description": "Optional text match against business name, industry, permit type and work description.",
+      "editor": "stringList",
+      "default": []
+    },
+    "minScore": {
+      "title": "Minimum opportunity score",
+      "type": "integer",
+      "description": "0-100. Higher values return fewer but stronger signals.",
+      "default": 35,
+      "minimum": 0,
+      "maximum": 100,
+      "editor": "number"
+    },
+    "onlyMultiSignal": {
+      "title": "Only multi-signal opportunities",
+      "type": "boolean",
+      "description": "Return only addresses supported by at least two signal types.",
+      "default": false,
+      "editor": "checkbox"
+    },
+    "includeBusinessRegistrations": {
+      "title": "Use business registrations",
+      "type": "boolean",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "includeSubmittedPermits": {
+      "title": "Use submitted permits",
+      "type": "boolean",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "includeIssuedPermits": {
+      "title": "Use issued permits",
+      "type": "boolean",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "includeResidential": {
+      "title": "Include residential permit signals",
+      "type": "boolean",
+      "description": "Off by default because this Actor is designed for B2B prospecting, not homeowners.",
+      "default": false,
+      "editor": "checkbox"
+    },
+    "maxResults": {
+      "title": "Maximum opportunities",
+      "type": "integer",
+      "default": 250,
+      "minimum": 1,
+      "maximum": 5000,
+      "editor": "number"
+    },
+    "maxRecordsPerSource": {
+      "title": "Maximum source records",
+      "type": "integer",
+      "description": "Safety cap per City dataset before scoring and merging.",
+      "default": 3000,
+      "minimum": 1,
+      "maximum": 10000,
+      "editor": "number"
+    },
+    "includeRaw": {
+      "title": "Include raw source rows",
+      "type": "boolean",
+      "description": "Adds the original public-data row under each evidence item. Usually not needed.",
+      "default": false,
+      "editor": "checkbox"
+    }
+  }
+}
