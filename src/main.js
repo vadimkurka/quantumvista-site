@@ -1,5 +1,5 @@
 import { Actor } from 'apify';
-import { buildOpportunities, businessSignal, daysAgoDate, permitSignal } from './core.js';
+import { buildOpportunities, businessSignal, daysAheadDate, daysAgoDate, permitSignal } from './core.js';
 import { fetchSocrataRows, getDatasetFields, pickField } from './socrata.js';
 
 const DATASETS = {
@@ -14,6 +14,7 @@ try {
     const input = (await Actor.getInput()) ?? {};
     const {
         daysBack = 30,
+        daysAhead = 90,
         maxResults = 250,
         maxRecordsPerSource = 3000,
         minScore = 35,
@@ -29,8 +30,9 @@ try {
     } = input;
 
     const since = daysAgoDate(daysBack);
+    const businessUntil = daysAheadDate(daysAhead);
     const sourceCap = Math.max(1, Math.min(Number(maxRecordsPerSource) || 3000, 10000));
-    Actor.log.info('Starting OpenSoon LA', { since, maxResults, minScore, sourceCap });
+    Actor.log.info('Starting OpenSoon LA', { since, businessUntil, maxResults, minScore, sourceCap });
 
     const tasks = [];
 
@@ -38,12 +40,13 @@ try {
         tasks.push((async () => {
             const fields = await getDatasetFields(DATASETS.businesses);
             const dateField = pickField(fields, ['location_start_date', 'start_date']);
+            const cityClause = fields.has('council_district') ? ' AND council_district > 0' : '';
             const rows = await fetchSocrataRows(DATASETS.businesses, {
-                where: `${dateField} >= '${since}T00:00:00.000'`,
+                where: `${dateField} >= '${since}T00:00:00.000' AND ${dateField} <= '${businessUntil}T23:59:59.999'${cityClause}`,
                 order: `${dateField} DESC`,
                 maxRows: sourceCap,
             });
-            Actor.log.info(`Business registrations fetched: ${rows.length}`);
+            Actor.log.info(`Business registry/start-date signals fetched: ${rows.length}`);
             return rows.map(businessSignal);
         })());
     }
@@ -100,8 +103,11 @@ try {
     const summary = {
         generatedAt: new Date().toISOString(),
         since,
+        businessStartHorizon: businessUntil,
         signalsRead: signals.length,
         opportunitiesReturned: opportunities.length,
+        independentCrossSourceMatches: opportunities.filter((item) => item.sourceFamilies?.length >= 2).length,
+        futureBusinessStarts: opportunities.filter((item) => item.futureBusinessStart).length,
         highConfidence: opportunities.filter((item) => item.confidence === 'high').length,
         mediumConfidence: opportunities.filter((item) => item.confidence === 'medium').length,
         sourceErrors: errors,
