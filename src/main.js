@@ -98,18 +98,41 @@ try {
         includeRaw,
     }).slice(0, Math.max(1, Math.min(Number(maxResults) || 250, 5000)));
 
-    if (opportunities.length) await Actor.pushData(opportunities);
+    const pricingInfo = Actor.getChargingManager().getPricingInfo();
+    const delivered = [];
+
+    if (pricingInfo.isPayPerEvent) {
+        for (const opportunity of opportunities) {
+            const charge = await Actor.charge({ eventName: 'result-item' });
+            if ((charge.chargedCount ?? 0) < 1) {
+                Actor.log.info('Result charge limit reached; stopping before unpaid output', {
+                    computed: opportunities.length,
+                    delivered: delivered.length,
+                });
+                break;
+            }
+            await Actor.pushData(opportunity);
+            delivered.push(opportunity);
+            if (charge.eventChargeLimitReached) break;
+        }
+    } else if (opportunities.length) {
+        await Actor.pushData(opportunities);
+        delivered.push(...opportunities);
+    }
 
     const summary = {
         generatedAt: new Date().toISOString(),
         since,
         businessStartHorizon: businessUntil,
         signalsRead: signals.length,
-        opportunitiesReturned: opportunities.length,
-        independentCrossSourceMatches: opportunities.filter((item) => item.sourceFamilies?.length >= 2).length,
-        futureBusinessStarts: opportunities.filter((item) => item.futureBusinessStart).length,
-        highConfidence: opportunities.filter((item) => item.confidence === 'high').length,
-        mediumConfidence: opportunities.filter((item) => item.confidence === 'medium').length,
+        opportunitiesComputed: opportunities.length,
+        opportunitiesReturned: delivered.length,
+        independentCrossSourceMatches: delivered.filter((item) => item.sourceFamilies?.length >= 2).length,
+        futureBusinessStarts: delivered.filter((item) => item.futureBusinessStart).length,
+        highConfidence: delivered.filter((item) => item.confidence === 'high').length,
+        mediumConfidence: delivered.filter((item) => item.confidence === 'medium').length,
+        payPerEventEnabled: pricingInfo.isPayPerEvent,
+        chargeEvent: pricingInfo.isPayPerEvent ? 'result-item' : null,
         sourceErrors: errors,
         datasets: DATASETS,
         note: 'Signals come from public City of Los Angeles datasets. Results indicate opportunity, not confirmed opening dates or buyer intent.',
