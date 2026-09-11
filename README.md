@@ -85,13 +85,13 @@ The example above is illustrative; it is not a real business record.
 
 ## Pay-per-event support
 
-The Actor supports Apify Pay Per Event monetization with the custom charge event:
+For Apify Pay Per Event, use the built-in synthetic event:
 
-- `result-item` — one delivered ranked opportunity.
+- `apify-default-dataset-item` — one ranked opportunity written to the Actor's default dataset.
 
-When PPE is enabled, the Actor charges before writing each paid result. If the user's maximum charge limit is reached, it stops before delivering unpaid output.
+Apify automatically charges this event for default-dataset items when the event is enabled in the Actor's monetization settings. No second custom per-result charge is implemented in the source, which avoids duplicate billing.
 
-Pricing is configured in Apify Console and is not hardcoded in the source.
+Pricing is configured in Apify Console and is not hardcoded in the source. A small `apify-actor-start` charge can also be used if needed to cover fixed run costs.
 
 ## Reliability
 
