@@ -35,6 +35,10 @@ npm start
 
 For local Actor execution, use the Apify CLI/runtime and provide input through the standard Actor input store.
 
+## Deployment boundary
+
+The repository is ready to import/build as an Apify Actor from its root. Publishing it into an Apify account still requires an authenticated Apify connection (GitHub import in Apify or an `APIFY_TOKEN`). No Apify credential is stored in this repository.
+
 ## Commercial validation
 
 Landing page: `opensoon-la.html`
