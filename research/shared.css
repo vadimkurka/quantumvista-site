@@ -434,3 +434,16 @@ section{padding:120px 0;position:relative;z-index:1}
 .footer-r{flex-wrap:wrap}
 @media(max-width:960px){.detail-grid{grid-template-columns:1fr;gap:32px}}
 @media(max-width:640px){.project-hero{min-height:auto;padding:150px 0 72px}.detail-copy p{font-size:15px}.article p{font-size:15px}}
+
+/* Five navigation items need a tablet breakpoint; mobile visual language unchanged. */
+@media(max-width:850px){
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .nav-links.open{
+    display:flex;flex-direction:column;
+    position:absolute;top:70px;left:0;right:0;
+    background:rgba(5,5,5,0.97);backdrop-filter:blur(30px);
+    padding:20px 24px;gap:16px;
+    border-bottom:1px solid var(--card-border);
+  }
+}
